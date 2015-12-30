@@ -39,7 +39,10 @@ def matrix_multiply_recursive(a, b):
 
 
 def _matrix_multiply_recursive(a, arf, arl, acf, acl, b, brf, brl, bcf, bcl, c, crf, crl, ccf, ccl):
-    if arf == arl:
+    if arf > arl or acf > acl or brf > brl or bcf > bcl:
+        return
+
+    if arf == arl and acf == acl and brf == brl and bcf == bcl:
         c[crf][ccf] += a[arf][acf] * b[brf][bcf]
         print('c[', crf, '][', ccf, '] += a[', arf, '][', acf, '] * b[', brf, '][', bcf, ']')
     else:
@@ -72,7 +75,7 @@ def _matrix_multiply_recursive(a, arf, arl, acf, acl, b, brf, brl, bcf, bcl, c, 
                                    c, crf, crm, ccm + 1, ccl)
 
         _matrix_multiply_recursive(a, arf, arm, acm + 1, acl,
-                                   b, brm + 1, brl, bcm+1, bcl,
+                                   b, brm + 1, brl, bcm + 1, bcl,
                                    c, crf, crm, ccm + 1, ccl)
 
         # C21 = A21 * B11 + A22 * B21
